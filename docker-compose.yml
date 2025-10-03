@@ -1,0 +1,43 @@
+#docker exec -it <quizapp_db> psql -U <postgres> -d <quizapp>
+
+
+services:
+  db:
+    image: postgres:16
+    container_name: quizapp_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Hema123
+      POSTGRES_DB: quizapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./backend
+    container_name: quizapp_backend
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: Hema123
+      DB_NAME: quizapp
+
+  frontend:
+    build: ./frontend
+    container_name: quizapp_frontend
+    restart: always
+    ports:
+      - "8080:80" # frontend served at http://localhost:8080
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
