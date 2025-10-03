@@ -4,7 +4,7 @@ version: '3.9'
 services:
   db:
     image: postgres:16
-    container_name: quizapp_backend_db
+    container_name: new_quizapp_db
     restart: always
     environment:
       POSTGRES_USER: postgres
