@@ -1,15 +1,13 @@
-#docker exec -it <quizapp_db> psql -U <postgres> -d <quizapp>
-
 version: '3.9'
 
 services:
   db:
     image: postgres:16
-    container_name: quizapp_db
+    container_name: quizapp_backend_db
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Hema123
+      POSTGRES_PASSWORD: Dakku123
       POSTGRES_DB: quizapp
     ports:
       - "5432:5432"
@@ -19,17 +17,19 @@ services:
 
   backend:
     build: ./backend
-    container_name: quizapp_backend
+    container_name: new_quizapp_backend
     restart: always
     ports:
-      - "3001:3001"
+      - "4422:3000"   # left: host port, right: container port (Dockerfile exposes 3000)
     depends_on:
       - db
     environment:
       DB_HOST: db
       DB_USER: postgres
-      DB_PASSWORD: Hema123
+      DB_PASSWORD: Dakku123
       DB_NAME: quizapp
+      DB_PORT: 5432
+      JWT_SECRET: dakku123
 
 volumes:
   db_data:
