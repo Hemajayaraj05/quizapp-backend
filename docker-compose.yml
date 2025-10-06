@@ -20,7 +20,7 @@ services:
     container_name: new_quizapp_backend
     restart: always
     ports:
-      - "4422:3000"   # left: host port, right: container port (Dockerfile exposes 3000)
+      - "3001:3001"   # left: host port, right: container port (Dockerfile exposes 3000)
     depends_on:
       - db
     environment:
