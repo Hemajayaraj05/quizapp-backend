@@ -8,8 +8,6 @@ const createQuizController=async(req,res)=>{
     try{
         const newQuiz=await createQuiz(req.body.quizname,teacherId);
         res.json(newQuiz);
-       
-
     }
     catch(err)
     {
@@ -18,7 +16,9 @@ const createQuizController=async(req,res)=>{
     }
 }
 
-module.exports =createQuizController;
 
 
+module.exports ={createQuizController};
 
+
+
