@@ -1,5 +1,5 @@
 const { createQuestion } = require("../models/questionSchema");
-const { renderQuestions ,deleteQuestion} = require("../models/questionSchema");
+const { renderQuestions, deleteQuestion,updateQuestion } = require("../models/questionSchema");
 
 const createNewQuestion = async (req, res) => {
   try {
@@ -35,4 +35,19 @@ const deleteQuestionController = async (req, res) => {
   }
 };
 
-module.exports = { createNewQuestion, ListQuestions,deleteQuestionController };
+const updateQuestionController = async (req, res) => {
+  try {
+    const updatedQues = await updateQuestion(req.body);
+    res.status(200).json(updatedQues);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ err });
+  }
+};
+
+module.exports = {
+  createNewQuestion,
+  ListQuestions,
+  deleteQuestionController,
+  updateQuestionController,
+};
