@@ -14,4 +14,10 @@ const renderQuestions = async(quizId)=>{
     return result.rows;
 }
 
-module.exports={createQuestion,renderQuestions};
+
+const deleteQuestion=async(questionId,quizId)=>{
+    const result=await pool.query('DELETE FROM questions WHERE id=$1 AND quizid=$2 RETURNING *',[questionId,quizId]);
+    return result.rows;
+}
+
+module.exports={createQuestion,renderQuestions,deleteQuestion};
