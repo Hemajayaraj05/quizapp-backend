@@ -1,4 +1,4 @@
-const {createQuiz, displayQuizzes}=require("../models/quizesSchema");
+const {createQuiz, displayQuizzes,updateName}=require("../models/quizesSchema");
 
 const createQuizController=async(req,res)=>{
 
@@ -29,14 +29,30 @@ const displayQuizBasedOnId=async(req,res)=>{
         console.log(err);
         res.status(400).json({message:err.message|| "Failed to fetch quizzes"});
 
-
     }
 
 }
 
+const updateQuizName = async (req, res) => {
+  console.log("This is update quiz", req.body, req.params.id);
+
+  try {
+    const teacherid = req.user.id;
+    const quizid = req.params.id;
+    const { quizname } = req.body;
+
+    const updated = await updateName(teacherid, quizid, quizname);
+    res.json(updated);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: err.message || "Failed to update name" });
+  }
+};
 
 
-module.exports ={createQuizController,displayQuizBasedOnId};
+
+
+module.exports ={createQuizController,displayQuizBasedOnId,updateQuizName};
 
 
 

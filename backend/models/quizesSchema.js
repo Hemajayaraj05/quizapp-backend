@@ -18,4 +18,12 @@ const displayQuizzes = async (teacherId) => {
   
 };
 
-module.exports = { createQuiz, displayQuizzes };
+const updateName=async(teacherId,quizid,quizname)=>{
+    const result=await pool.query(
+        "UPDATE quizzes SET quizname=$1 WHERE teacherid=$2 AND id=$3",[quizname,teacherId,quizid]
+    )
+
+    return result.rows[0]
+}
+
+module.exports = { createQuiz, displayQuizzes,updateName };
