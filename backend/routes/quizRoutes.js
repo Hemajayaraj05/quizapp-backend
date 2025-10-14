@@ -9,6 +9,6 @@ const router=express.Router();
 router.post('/create',authMiddleware,createQuizController);
 router.get('/list', authMiddleware,displayQuizBasedOnId)
 router.put('/update/:id',authMiddleware,updateQuizName)
-router.delete('/delete/:id',deleteQuizName);
+router.delete('/delete/:id',authMiddleware,deleteQuizName);
 
 module.exports=router;

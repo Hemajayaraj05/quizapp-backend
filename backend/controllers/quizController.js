@@ -51,8 +51,9 @@ const updateQuizName = async (req, res) => {
 
 const deleteQuizName=async(req,res)=>{
    try{
+   const teacherid = req.user.id;
     const quizid=req.params.id;
-    const deleted=await deleteQuiz(quizid);
+    const deleted=await deleteQuiz(quizid,teacherid);
     res.json({deletedQuiz:deleted});
 
    }

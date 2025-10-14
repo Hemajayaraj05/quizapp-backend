@@ -26,9 +26,9 @@ const updateName=async(teacherId,quizid,quizname)=>{
     return result.rows[0];
 }
 
-const deleteQuiz=async(quizid)=>{
+const deleteQuiz=async(quizid,teacherId)=>{
   
-    const result=await pool.query("DELETE FROM quizzes WHERE id=$1 RETURNING *",[quizid])
+    const result=await pool.query("DELETE FROM quizzes WHERE id=$1  AND teacherid=$2 RETURNING *",[quizid,teacherId])
     return  result.rows[0];
 
 }
