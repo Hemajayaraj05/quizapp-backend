@@ -1,4 +1,4 @@
-const {createQuiz, displayQuizzes,updateName}=require("../models/quizesSchema");
+const {createQuiz, displayQuizzes,updateName, deleteQuiz}=require("../models/quizesSchema");
 
 const createQuizController=async(req,res)=>{
 
@@ -49,10 +49,24 @@ const updateQuizName = async (req, res) => {
   }
 };
 
+const deleteQuizName=async(req,res)=>{
+   try{
+    const quizid=req.params.id;
+    const deleted=await deleteQuiz(quizid);
+    res.json({deletedQuiz:deleted});
+
+   }
+   catch(err)
+   {
+    console.log(err);
+    res.status(400).json({message:err.message || "Failed to delete quiz"})
+   }
+}
 
 
 
-module.exports ={createQuizController,displayQuizBasedOnId,updateQuizName};
+
+module.exports ={createQuizController,displayQuizBasedOnId,updateQuizName,deleteQuizName};
 
 
 

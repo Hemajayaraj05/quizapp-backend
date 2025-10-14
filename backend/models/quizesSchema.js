@@ -26,17 +26,11 @@ const updateName=async(teacherId,quizid,quizname)=>{
     return result.rows[0];
 }
 
-const deleteQuiz=async(req,res)=>{
-  const quizid=req.params.id;
-  try{
+const deleteQuiz=async(quizid)=>{
+  
     const result=await pool.query("DELETE FROM quizzes WHERE id=$1 RETURNING *",[quizid])
-    res.json({ message: "Quiz deleted successfully", deletedQuiz: result.rows[0] });
+    return  result.rows[0];
 
-  }catch(err)
-  {
-    console.log("Failed to delete quiz",err);
-    res.send(err);
-  }
 }
 
 module.exports = { createQuiz, displayQuizzes,updateName,deleteQuiz};
