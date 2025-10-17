@@ -1,4 +1,5 @@
 const express = require("express");
+
 require('dotenv').config();
 const authRoutes=require('./routes/authRoutes')
 const quizRoutes=require('./routes/quizRoutes')

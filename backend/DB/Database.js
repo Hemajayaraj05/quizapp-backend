@@ -17,4 +17,5 @@ pool.connect()
     client.release();
   })
   .catch(err => console.error("Error connecting to DB", err.stack));
+  
 module.exports=pool;
